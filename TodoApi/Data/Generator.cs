@@ -27,69 +27,72 @@ namespace TodoApi.Data
                 var hobbyType = context.Add(new TodoItemType { Name = "Hobby", Description = "Tasks for hobbies" }).Entity;
                 var groceryType = context.Add(new TodoItemType { Name = "Grocery", Description = "Item needed when shopping" }).Entity;
 
-                context.AddRange(
-                    
-                    );
+                var ChoreList = new TodoItemList
+                {
+                    Name = DateTime.Today.DayOfWeek + " Chores",
+                    Description = "Tracking chores that aren't finished",
+                    DueDate = DateTime.Today,
+                    TodoItems = new List<TodoItem>()
+                };
 
-                context.AddRange(
-                    new TodoItemList
-                    {
-                        Name = "Day Job",
-                        Description = "Tracking day to day work tasks",
-                        DueDate = DateTime.Today.AddDays(10),
-                        TodoItems = new List<TodoItem>() {
-                            new TodoItem 
-                            { 
-                                Name = "Fillout Form",
-                                IsComplete = false,
-                                OrderPosition = 0 ,
-                                SelectedTodoItemType = workType
-                            },
-                            new TodoItem
-                            {
-                                Name = "Peer Review",
-                                IsComplete = false,
-                                OrderPosition = 1 ,
-                                SelectedTodoItemType = workType
-                            },
-                            new TodoItem
-                            {
-                                Name = "File documentation",
-                                IsComplete = false,
-                                OrderPosition = 2 ,
-                                SelectedTodoItemType = workType
-                            }
-                        }
-                    },
-                    new TodoItemList
-                    {
-                        Name = "Monday Chores",
-                        Description = "Tracking chores that aren't finished",
-                        DueDate = DateTime.Today.AddDays(10),
-                        TodoItems = new List<TodoItem>() {
-                            new TodoItem 
-                            { 
-                                Name = "Walk the dog",
-                                IsComplete = false,
-                                OrderPosition = 0,
-                                SelectedTodoItemType = choreType 
-                            },
-                            new TodoItem 
-                            { 
-                                Name = "Clean up yard",
-                                IsComplete = false,
-                                OrderPosition = 1,
-                                SelectedTodoItemType = choreType 
-                            },
-                            new TodoItem 
-                            { 
-                                Name = "Vacuum basement",
-                                IsComplete = false,
-                                OrderPosition = 2,
-                                SelectedTodoItemType = choreType 
-                            }
-                        }
-                    });
+                ChoreList.TodoItems.Add(new TodoItem()
+                {
+                    Name = "Walk the dog",
+                    IsComplete = false,
+                    OrderPosition = 0,
+                    SelectedTodoItemType = choreType
+                });
+
+                ChoreList.TodoItems.Add(new TodoItem()
+                {
+                    Name = "Clean up yard",
+                    IsComplete = false,
+                    OrderPosition = 1,
+                    SelectedTodoItemType = choreType
+                });
+
+                ChoreList.TodoItems.Add(new TodoItem()
+                {
+                    Name = "Vacuum basement",
+                    IsComplete = false,
+                    OrderPosition = 2,
+                    SelectedTodoItemType = choreType
+                });
+
+                var WorkList = new TodoItemList
+                {
+                    Name = "Day Job",
+                    Description = "Tracking day to day work tasks",
+                    DueDate = DateTime.Today.AddDays(10),
+                    TodoItems = new List<TodoItem>()
+                };
+
+                WorkList.TodoItems.Add(new TodoItem()
+                {
+                    Name = "Fillout Form",
+                    IsComplete = false,
+                    OrderPosition = 0,
+                    SelectedTodoItemType = workType
+                });
+                
+                WorkList.TodoItems.Add(new TodoItem()
+                {
+                    Name = "Peer Review",
+                    IsComplete = false,
+                    OrderPosition = 1,
+                    SelectedTodoItemType = workType
+                });
+                
+                WorkList.TodoItems.Add(new TodoItem()
+                {
+                    Name = "File documentation",
+                    IsComplete = false,
+                    OrderPosition = 2,
+                    SelectedTodoItemType = workType
+                });
+
+                context.TodoItemLists.Add(ChoreList);
+                context.TodoItemLists.Add(WorkList);
 
                 context.SaveChanges();
             }

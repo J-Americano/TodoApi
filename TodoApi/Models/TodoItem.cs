@@ -15,6 +15,5 @@ namespace TodoApi.Models
         public string Name { get; set; }
         public bool IsComplete { get; set; }
         public TodoItemType SelectedTodoItemType { get; set; }
-
     }
 }
