@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 
 namespace TodoApi.Models
 {
-    public class TodoItemType
+    public class TodoItemList
     {
+        //public Guid OwnerId { get; set; }
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
+        public DateTime DueDate { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public List<TodoItem> TodoItems { get; set; }
     }
 }
